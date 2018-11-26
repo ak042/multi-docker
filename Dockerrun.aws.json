@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "akio63/multi-client",
+      "hostname": "client",
+      "essential": false
+    }, 
+    {
+      "name": "server",
+      "image": "akio63/multi-server",
+      "hostname": "api",
+      "essential": false
+    }, 
+    {
+      "name": "worker",
+      "image": "akio63/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    }, 
+    {
+      "name": "nginx",
+      "image": "akio63/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMapping": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"] 
+    }    
+  ]
+}
